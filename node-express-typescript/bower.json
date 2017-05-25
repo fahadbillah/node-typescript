@@ -1,0 +1,21 @@
+{
+  "name": "node-express-typescript",
+  "description": "node-express-typescript Sample Application (TypeScript)",
+  "main": "",
+  "authors": [
+    "Fahad Billah <fahadbillah@yahoo.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/fahadbillah/node-typescript",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "out/public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
