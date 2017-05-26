@@ -5,6 +5,7 @@ import * as path from 'path';
 import index from './routes/index';
 import users from './routes/users';
 import cookieParser = require('cookie-parser'); // this module doesn't use the ES6 default export yet
+import * as mongoose from 'mongoose';
 
 const app: express.Express = express();
 
@@ -16,9 +17,12 @@ app.set('view engine', 'jade');
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/max');
 
 app.use('/', index);
 app.use('/user', users);

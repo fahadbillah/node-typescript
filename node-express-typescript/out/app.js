@@ -7,6 +7,7 @@ var path = require("path");
 var index_1 = require("./routes/index");
 var users_1 = require("./routes/users");
 var cookieParser = require("cookie-parser"); // this module doesn't use the ES6 default export yet
+var mongoose = require("mongoose");
 var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -15,9 +16,11 @@ app.set('view engine', 'jade');
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/max');
 app.use('/', index_1.default);
 app.use('/user', users_1.default);
 // catch 404 and forward to error handler
