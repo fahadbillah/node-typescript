@@ -3,7 +3,7 @@ import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 import * as path from 'path';
 import index from './routes/index';
-import users from './routes/users';
+import employees from './routes/employees';
 import cookieParser = require('cookie-parser'); // this module doesn't use the ES6 default export yet
 import * as mongoose from 'mongoose';
 
@@ -25,7 +25,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/max');
 
 app.use('/', index);
-app.use('/user', users);
+app.use('/employee', employees);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -50,7 +50,7 @@ if (app.get('env') === 'development') {
 }
 
 // production error handler
-// no stacktraces leaked to user
+// no stacktraces leaked to employees
 app.use((error: any, req, res, next) => {
   res.status(error['status'] || 500);
   res.render('error', {

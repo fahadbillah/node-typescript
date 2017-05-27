@@ -5,7 +5,7 @@ var logger = require("morgan");
 var bodyParser = require("body-parser");
 var path = require("path");
 var index_1 = require("./routes/index");
-var users_1 = require("./routes/users");
+var employees_1 = require("./routes/employees");
 var cookieParser = require("cookie-parser"); // this module doesn't use the ES6 default export yet
 var mongoose = require("mongoose");
 var app = express();
@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/max');
 app.use('/', index_1.default);
-app.use('/user', users_1.default);
+app.use('/employee', employees_1.default);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
@@ -42,7 +42,7 @@ if (app.get('env') === 'development') {
     });
 }
 // production error handler
-// no stacktraces leaked to user
+// no stacktraces leaked to employees
 app.use(function (error, req, res, next) {
     res.status(error['status'] || 500);
     res.render('error', {

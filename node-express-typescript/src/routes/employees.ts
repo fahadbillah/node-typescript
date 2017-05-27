@@ -1,34 +1,44 @@
 import { Router } from 'express';
 import Employee = require('../models/Employee/Employee');
 
-const users:Router = Router();
+const employees:Router = Router();
 
-/* GET users listing. */
-users.get('/registration', function(req, res, next) {
+
+
+/* GET employees listing. */
+employees.get('/registration', function(req, res, next) {
   // res.send('respond with a resource');
   res.render('employee/registration', { title: 'Visual Studio Code!' });
 });
 
-users.post('/registration/submit', function(req, res) {
+employees.post('/registration/submit', function(req, res) {
   
   var employee = new Employee( req.body );
   
   var error = employee.validateSync();
 
   // console.log(error);
+  var message = '';
 
   if (error) { 
     res.json({ success: 0 , data: req.body});
   } else {
-    res.json({ success: 1, data: { user: req.body }});
+    employee.save(function(err){
+      if(err){
+        res.status(500).json(err);
+      }else{
+        message = 'Employee created successfully!';
+        res.json({ success: 1, data: { user: req.body }, message: message});
+      }
+    });
   }
 
 
   // res.redirect('/employee/registration/success');
 });
 
-users.get('/registration/success', function(req, res, next) {
+employees.get('/registration/success', function(req, res, next) {
   res.render('employee/success', { title: 'User Registration Successful!' });
 });
 
-export default users;
+export default employees;
