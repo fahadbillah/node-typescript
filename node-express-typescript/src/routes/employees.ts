@@ -41,4 +41,33 @@ employees.get('/registration/success', function(req, res, next) {
   res.render('employee/success', { title: 'User Registration Successful!' });
 });
 
+employees.get('/', function(req, res, next) {
+  console.log(Employee);
+  var employee = new Employee();
+  console.log(employee);
+  // Employee.find({}, function(error ,data) {
+  //   if (error) { 
+  //       res.json({ success: 0, data: {}, message: 'no data found!'});
+  //     // res.render('employee/list', { title: 'Employee list' , data: [], message: 'no data found!'});
+  //   } else {
+  //       res.json({ success: 1, data: data, message: 'data found!'});
+  //     // res.render('employee/list', { title: 'Employee list' , data: data, message: 'data found!'});
+  //   }
+  // })
+  employee.find({}, function(error ,data) {
+    if (error) { 
+        res.json({ success: 0, data: {}, message: 'no data found!'});
+      // res.render('employee/list', { title: 'Employee list' , data: [], message: 'no data found!'});
+    } else {
+        res.json({ success: 1, data: data, message: 'data found!'});
+      // res.render('employee/list', { title: 'Employee list' , data: data, message: 'data found!'});
+    }
+  })
+});
+
 export default employees;
+
+
+
+
+   
